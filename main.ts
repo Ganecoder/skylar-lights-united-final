@@ -1,97 +1,3 @@
-forever(function () {
-    if (Music == 3) {
-        music.playMelody("- A - A - A - B ", 250)
-        if (Music == 3) {
-            music.playMelody("A G F E - E - E ", 250)
-            if (Music == 3) {
-                music.playMelody("A G F D - D - D ", 250)
-                if (Music == 3) {
-                    music.playMelody("A G F G - G - G ", 250)
-                    if (Music == 3) {
-                        for (let index = 0; index < 2; index++) {
-                            if (Music == 3) {
-                                music.playMelody("E E E E - F G F ", 250)
-                                if (Music == 3) {
-                                    music.playMelody("E F D C C - E - ", 250)
-                                    if (Music == 3) {
-                                        music.playMelody("E E C C - E F E ", 250)
-                                        if (Music == 3) {
-                                            music.playMelody("F - G - A G F E ", 250)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (Music == 3) {
-                            for (let index = 0; index < 2; index++) {
-                                if (Music == 3) {
-                                    music.playMelody("F - E - F G E F ", 250)
-                                    if (Music == 3) {
-                                        music.playMelody("E F E - C D E D ", 250)
-                                    }
-                                }
-                            }
-                            if (Music == 3) {
-                                music.playMelody("A A G G F E D E ", 250)
-                                if (Music == 3) {
-                                    music.playMelody("G G - G F G A C5 ", 250)
-                                    pause(1000)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-})
-forever(function () {
-    if (Music == 3) {
-        music.playMelody("- A - A - A - B ", 250)
-        if (Music == 3) {
-            music.playMelody("A G F E - E - E ", 250)
-            if (Music == 3) {
-                music.playMelody("A G F D - D - D ", 250)
-                if (Music == 3) {
-                    music.playMelody("A G F G - G - G ", 250)
-                    if (Music == 3) {
-                        for (let index = 0; index < 2; index++) {
-                            if (Music == 3) {
-                                music.playMelody("A A G G - A B A ", 250)
-                                if (Music == 3) {
-                                    music.playMelody("A B G F F - A - ", 250)
-                                    if (Music == 3) {
-                                        music.playMelody("A A F F - A B A ", 250)
-                                        if (Music == 3) {
-                                            music.playMelody("C - C - C C C C ", 250)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if (Music == 3) {
-                            for (let index = 0; index < 2; index++) {
-                                if (Music == 3) {
-                                    music.playMelody("B - A - B C5 A B ", 250)
-                                    if (Music == 3) {
-                                        music.playMelody("A B A - F A B F ", 250)
-                                    }
-                                }
-                            }
-                            if (Music == 3) {
-                                music.playMelody("A A G G F E D E ", 250)
-                                if (Music == 3) {
-                                    music.playMelody("G G - G F G A C5 ", 250)
-                                    pause(1000)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     skylar,
@@ -172,7 +78,35 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenSouth, function (sprite, location) {
     Music = 0
     tiles.setTilemap(tilemap`level_7`)
-    tiles.placeOnTile(skylar, tiles.getTileLocation(27, 19))
+    tiles.placeOnTile(sprite, tiles.getTileLocation(27, 19))
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
+    tiles.setTilemap(tilemap`level20`)
+    tiles.placeOnTile(sprite, tiles.getTileLocation(1, 18))
+    tiles.placeOnTile(quinn, tiles.getTileLocation(100, 100))
+    Gargus.setFlag(SpriteFlag.Invisible, true)
+    story = 5
+    for (let value of tiles.getTilesByType(sprites.dungeon.buttonTealDepressed)) {
+        garb = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f 8 8 8 8 f . . . . . 
+            . . . f f 8 8 8 8 8 8 f f . . . 
+            . . f 8 8 8 8 8 8 8 8 8 8 f . . 
+            . f 8 1 9 8 8 8 8 8 8 9 1 8 f . 
+            . f 8 1 f 8 8 d d 8 8 f 1 8 f . 
+            . . f 8 8 8 8 d d 8 8 8 8 f . . 
+            . f 8 8 7 7 8 8 8 8 7 7 8 8 f . 
+            f 8 8 8 7 7 7 8 8 7 8 7 8 8 8 f 
+            f 8 8 f 7 7 7 7 7 8 7 7 f 8 8 f 
+            f 8 8 8 7 7 7 7 7 7 7 7 8 8 8 f 
+            . f 8 8 7 7 7 7 7 7 7 7 8 8 f . 
+            . . f f f 7 7 f f 7 7 f f f . . 
+            . . . . f f f . . f f . . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(garb, value)
+    }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (title < 1) {
@@ -661,6 +595,35 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
+    story = 4
+    tiles.placeOnTile(quinn, tiles.getTileLocation(1, 1))
+    tiles.setTilemap(tilemap`level2`)
+    tiles.placeOnTile(skylar, tiles.getTileLocation(10, 1))
+    quinn.setFlag(SpriteFlag.Invisible, false)
+    garb.setFlag(SpriteFlag.Invisible, false)
+    for (let value2 of tiles.getTilesByType(sprites.dungeon.buttonTealDepressed)) {
+        garb = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f 8 8 8 8 f . . . . . 
+            . . . f f 8 8 8 8 8 8 f f . . . 
+            . . f 8 8 8 8 8 8 8 8 8 8 f . . 
+            . f 8 1 9 8 8 8 8 8 8 9 1 8 f . 
+            . f 8 1 f 8 8 d d 8 8 f 1 8 f . 
+            . . f 8 8 8 8 d d 8 8 8 8 f . . 
+            . f 8 8 7 7 8 8 8 8 7 7 8 8 f . 
+            f 8 8 8 7 7 7 8 8 7 8 7 8 8 8 f 
+            f 8 8 f 7 7 7 7 7 8 7 7 f 8 8 f 
+            f 8 8 8 7 7 7 7 7 7 7 7 8 8 8 f 
+            . f 8 8 7 7 7 7 7 7 7 7 8 8 f . 
+            . . f f f 7 7 f f 7 7 f f f . . 
+            . . . . f f f . . f f . . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(garb, value2)
+    }
+})
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.ImageAnimation, skylar)
 })
@@ -715,6 +678,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`tile3`, function (sprite, loc
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedNorth, function (sprite, location) {
     Music = 4
+    story = 4
     tiles.setTilemap(tilemap`level9`)
     tiles.placeOnTile(skylar, tiles.getTileLocation(10, 18))
     tiles.placeOnTile(Gargus, tiles.getTileLocation(100, 100))
@@ -789,7 +753,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedSouth, function
     tiles.placeOnTile(skylar, tiles.getTileLocation(9, 1))
     tiles.placeOnTile(garb, tiles.getTileLocation(100, 100))
     quinn.setFlag(SpriteFlag.Invisible, true)
-    garb.setFlag(SpriteFlag.Invisible, true)
+    garb.setFlag(SpriteFlag.Invisible, false)
+    garb.destroy()
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     animation.stopAnimation(animation.AnimationTypes.ImageAnimation, skylar)
@@ -812,6 +777,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`tile2`, function (sprite, loc
     if (story >= 2) {
         Music = 0
         tiles.setTilemap(tilemap`level_7`)
+        tiles.placeOnTile(skylar, tiles.getTileLocation(1, 22))
     }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -899,12 +865,34 @@ sprites.onDestroyed(SpriteKind.Projectile, function (sprite) {
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenNorth, function (sprite, location) {
     Music = 0
+    story = 4
     tiles.setTilemap(tilemap`level2`)
     tiles.placeOnTile(skylar, tiles.getTileLocation(6, 14))
     tiles.placeOnTile(garb, tiles.getTileLocation(8, 10))
     tiles.placeOnTile(quinn, tiles.getTileLocation(1, 1))
     garb.setFlag(SpriteFlag.Invisible, false)
     quinn.setFlag(SpriteFlag.Invisible, false)
+    for (let value22 of tiles.getTilesByType(sprites.dungeon.buttonTealDepressed)) {
+        garb = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . f f f f . . . . . . 
+            . . . . . f 8 8 8 8 f . . . . . 
+            . . . f f 8 8 8 8 8 8 f f . . . 
+            . . f 8 8 8 8 8 8 8 8 8 8 f . . 
+            . f 8 1 9 8 8 8 8 8 8 9 1 8 f . 
+            . f 8 1 f 8 8 d d 8 8 f 1 8 f . 
+            . . f 8 8 8 8 d d 8 8 8 8 f . . 
+            . f 8 8 7 7 8 8 8 8 7 7 8 8 f . 
+            f 8 8 8 7 7 7 8 8 7 8 7 8 8 8 f 
+            f 8 8 f 7 7 7 7 7 8 7 7 f 8 8 f 
+            f 8 8 8 7 7 7 7 7 7 7 7 8 8 8 f 
+            . f 8 8 7 7 7 7 7 7 7 7 8 8 f . 
+            . . f f f 7 7 f f 7 7 f f f . . 
+            . . . . f f f . . f f . . . . . 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(garb, value22)
+    }
 })
 let fight = 0
 let Gargus: Sprite = null
@@ -3527,25 +3515,6 @@ game.onUpdate(function () {
     }
 })
 forever(function () {
-    if (Music == 2) {
-        music.playMelody("A G A G A G A G ", 274)
-        if (Music == 2) {
-            music.playMelody("B A B A B A B A ", 274)
-            if (Music == 2) {
-                music.playMelody("A G A G A G A G ", 274)
-                if (Music == 2) {
-                    music.playMelody("B A B A B A B A ", 274)
-                    pause(100)
-                    if (Music == 2) {
-                        music.playMelody("F E - D - F E D ", 274)
-                        pause(1000)
-                    }
-                }
-            }
-        }
-    }
-})
-forever(function () {
     if (Music == 0) {
         pause(100)
         music.playMelody("D - A - - C - - ", 170)
@@ -3572,25 +3541,6 @@ forever(function () {
                         }
                     }
                 }
-            }
-        }
-    }
-})
-forever(function () {
-    if (skylar.overlapsWith(Gargus)) {
-        if (fight == 0) {
-            if (story < 2) {
-                slash += 1
-                fight = 1
-                Music = 2
-                tiles.setTilemap(tilemap`level_5`)
-                tiles.placeOnTile(skylar, tiles.getTileLocation(3, 3))
-                tiles.placeOnTile(Gargus, tiles.getTileLocation(6, 3))
-            }
-        } else {
-            if (fight == 1) {
-                info.changeLifeBy(-1)
-                music.playMelody("B B A A G G F F ", 1000)
             }
         }
     }
@@ -3640,6 +3590,37 @@ forever(function () {
                     }
                 }
             }
+        }
+    }
+})
+forever(function () {
+    if (skylar.overlapsWith(Gargus)) {
+        garb.destroy()
+        if (fight == 0) {
+            if (story < 6) {
+                slash += 1
+                Music = 2
+                fight = 1
+                tiles.setTilemap(tilemap`level_5`)
+                tiles.placeOnTile(skylar, tiles.getTileLocation(3, 3))
+                tiles.placeOnTile(Gargus, tiles.getTileLocation(6, 3))
+            }
+        } else {
+            if (fight == 1) {
+                info.changeLifeBy(-1)
+                music.playMelody("B B A A G G F F ", 1000)
+            }
+        }
+    }
+    if (fight == 0) {
+        if (story == 7) {
+            slash += 1
+            Music = 2
+            enemy_health = 50
+            fight = 3
+            tiles.setTilemap(tilemap`level_5`)
+            tiles.placeOnTile(skylar, tiles.getTileLocation(3, 3))
+            tiles.placeOnTile(Gargus, tiles.getTileLocation(6, 3))
         }
     }
 })
@@ -3697,6 +3678,7 @@ forever(function () {
         game.showLongText("You are really strong if you can take out enemies!", DialogLayout.Bottom)
         game.showLongText("Each one has a pattern you can follow to beat them!", DialogLayout.Bottom)
         game.showLongText("Make sure to make good use of it.", DialogLayout.Bottom)
+        info.setLife(3)
     }
 })
 forever(function () {
@@ -3711,17 +3693,194 @@ forever(function () {
 })
 forever(function () {
     if (enemy_health == 0) {
-        if (story == 4) {
+        if (story == 5) {
             garb.setFlag(SpriteFlag.Invisible, true)
             enemy_health = 20
-            story = 5
+            story = 6
+            Music = 0
+            fight = 0
+            slash = 0
+            tiles.placeOnTile(skylar, tiles.getTileLocation(16, 13))
+            tiles.placeOnTile(garb, tiles.getTileLocation(100, 100))
+            tiles.setTilemap(tilemap`level20`)
+            pause(200)
+            garb.setFlag(SpriteFlag.Invisible, true)
+            enemy_health = 20
+            story = 6
+            Music = 0
+            fight = 0
+            slash = 0
+            tiles.placeOnTile(skylar, tiles.getTileLocation(16, 13))
+            tiles.placeOnTile(garb, tiles.getTileLocation(100, 100))
+            tiles.setTilemap(tilemap`level20`)
+        }
+    }
+})
+forever(function () {
+    if (enemy_health == 50) {
+        if (story == 6) {
+            enemy_health = 50
+            Music = 0
+            fight = 0
+            slash = 0
+            tiles.setTilemap(tilemap`level20`)
+        }
+    }
+})
+forever(function () {
+    if (fight == 3) {
+        Gargus.ax = 20
+        pause(500)
+        Gargus.ay = 20
+        pause(500)
+        Gargus.ax = -20
+        pause(500)
+        Gargus.ay = -20
+        pause(500)
+    }
+})
+forever(function () {
+    if (Music == 3) {
+        music.playMelody("- A - A - A - B ", 250)
+        if (Music == 3) {
+            music.playMelody("A G F E - E - E ", 250)
+            if (Music == 3) {
+                music.playMelody("A G F D - D - D ", 250)
+                if (Music == 3) {
+                    music.playMelody("A G F G - G - G ", 250)
+                    if (Music == 3) {
+                        for (let index = 0; index < 2; index++) {
+                            if (Music == 3) {
+                                music.playMelody("E E E E - F G F ", 250)
+                                if (Music == 3) {
+                                    music.playMelody("E F D C C - E - ", 250)
+                                    if (Music == 3) {
+                                        music.playMelody("E E C C - E F E ", 250)
+                                        if (Music == 3) {
+                                            music.playMelody("F - G - A G F E ", 250)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (Music == 3) {
+                            for (let index = 0; index < 2; index++) {
+                                if (Music == 3) {
+                                    music.playMelody("F - E - F G E F ", 250)
+                                    if (Music == 3) {
+                                        music.playMelody("E F E - C D E D ", 250)
+                                    }
+                                }
+                            }
+                            if (Music == 3) {
+                                music.playMelody("A A G G F E D E ", 250)
+                                if (Music == 3) {
+                                    music.playMelody("G G - G F G A C5 ", 250)
+                                    pause(1000)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+})
+forever(function () {
+    if (Music == 3) {
+        music.playMelody("- A - A - A - B ", 250)
+        if (Music == 3) {
+            music.playMelody("A G F E - E - E ", 250)
+            if (Music == 3) {
+                music.playMelody("A G F D - D - D ", 250)
+                if (Music == 3) {
+                    music.playMelody("A G F G - G - G ", 250)
+                    if (Music == 3) {
+                        for (let index = 0; index < 2; index++) {
+                            if (Music == 3) {
+                                music.playMelody("A A G G - A B A ", 250)
+                                if (Music == 3) {
+                                    music.playMelody("A B G F F - A - ", 250)
+                                    if (Music == 3) {
+                                        music.playMelody("A A F F - A B A ", 250)
+                                        if (Music == 3) {
+                                            music.playMelody("C - C - C C C C ", 250)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (Music == 3) {
+                            for (let index = 0; index < 2; index++) {
+                                if (Music == 3) {
+                                    music.playMelody("B - A - B C5 A B ", 250)
+                                    if (Music == 3) {
+                                        music.playMelody("A B A - F A B F ", 250)
+                                    }
+                                }
+                            }
+                            if (Music == 3) {
+                                music.playMelody("A A G G F E D E ", 250)
+                                if (Music == 3) {
+                                    music.playMelody("G G - G F G A C5 ", 250)
+                                    pause(1000)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+})
+forever(function () {
+    if (enemy_health == 0) {
+        if (story == 4) {
+            pause(100)
+            garb.setFlag(SpriteFlag.Invisible, false)
+            enemy_health = 20
+            story = 4
             Music = 0
             fight = 0
             slash = 0
             tiles.setTilemap(tilemap`level2`)
-            tiles.placeOnTile(skylar, tiles.getTileLocation(7, 10))
+            tiles.placeOnTile(skylar, tiles.getTileLocation(8, 10))
             tiles.placeOnTile(garb, tiles.getTileLocation(100, 100))
             tiles.placeOnTile(quinn, tiles.getTileLocation(1, 1))
+        }
+    }
+})
+forever(function () {
+    if (enemy_health == 0) {
+        if (story == 5) {
+            pause(100)
+            garb.setFlag(SpriteFlag.Invisible, false)
+            story = 6
+            enemy_health = 50
+            Music = 0
+            fight = 0
+            slash = 0
+            tiles.setTilemap(tilemap`level20`)
+            tiles.placeOnTile(skylar, tiles.getTileLocation(16, 13))
+            tiles.placeOnTile(Gargus, tiles.getTileLocation(100, 100))
+            tiles.placeOnTile(quinn, tiles.getTileLocation(100, 100))
+        }
+    }
+})
+forever(function () {
+    if (enemy_health == 0) {
+        if (story == 7) {
+            pause(100)
+            garb.setFlag(SpriteFlag.Invisible, false)
+            story = 8
+            enemy_health = 20
+            Music = 0
+            fight = 0
+            slash = 0
+            tiles.setTilemap(tilemap`level20`)
+            tiles.placeOnTile(skylar, tiles.getTileLocation(7, 7))
+            tiles.placeOnTile(Gargus, tiles.getTileLocation(100, 100))
+            tiles.placeOnTile(quinn, tiles.getTileLocation(100, 100))
         }
     }
 })
@@ -3770,15 +3929,29 @@ forever(function () {
 })
 forever(function () {
     if (garb.overlapsWith(skylar)) {
-        if (story == 3) {
+        if (story == 4) {
             if (fight == 0) {
-                info.setLife(3)
                 tiles.setTilemap(tilemap`level_5`)
                 Music = 2
                 story = 4
                 slash = 1
                 fight = 2
                 tiles.placeOnTile(quinn, tiles.getTileLocation(100, 100))
+                tiles.placeOnTile(skylar, tiles.getTileLocation(4, 4))
+                tiles.placeOnTile(garb, tiles.getTileLocation(4, 0))
+            }
+        }
+    }
+})
+forever(function () {
+    if (garb.overlapsWith(skylar)) {
+        if (story == 5) {
+            if (fight == 0) {
+                tiles.setTilemap(tilemap`level_5`)
+                Music = 2
+                story = 5
+                slash = 1
+                fight = 2
                 tiles.placeOnTile(skylar, tiles.getTileLocation(4, 4))
                 tiles.placeOnTile(garb, tiles.getTileLocation(4, 0))
             }
@@ -3797,6 +3970,19 @@ forever(function () {
     }
 })
 forever(function () {
+    if (story == 6) {
+        tiles.placeOnTile(Gargus, tiles.getTileLocation(7, 7))
+        tiles.placeOnTile(skylar, tiles.getTileLocation(16, 13))
+        Gargus.setFlag(SpriteFlag.Invisible, false)
+        tiles.setTilemap(tilemap`level20`)
+        fight = 0
+        Music = 0
+        slash = 0
+        fight = 0
+        story = 7
+    }
+})
+forever(function () {
     if (fight == 2) {
         garb.setVelocity(-50, 0)
         pause(500)
@@ -3812,15 +3998,32 @@ forever(function () {
 })
 forever(function () {
     if (garb.overlapsWith(projectile)) {
-        if (story == 4) {
-            animation.runImageAnimation(
-            garb,
-            assets.animation`myAnim0`,
-            100,
-            false
-            )
-            enemy_health += -1
-            tiles.placeOnTile(projectile, tiles.getTileLocation(100, 100))
+        animation.runImageAnimation(
+        garb,
+        assets.animation`myAnim0`,
+        100,
+        false
+        )
+        enemy_health += -1
+        tiles.placeOnTile(projectile, tiles.getTileLocation(100, 100))
+    }
+})
+forever(function () {
+    if (Music == 2) {
+        music.playMelody("A G A G A G A G ", 274)
+        if (Music == 2) {
+            music.playMelody("B A B A B A B A ", 274)
+            if (Music == 2) {
+                music.playMelody("A G A G A G A G ", 274)
+                if (Music == 2) {
+                    music.playMelody("B A B A B A B A ", 274)
+                    pause(100)
+                    if (Music == 2) {
+                        music.playMelody("F E - D - F E D ", 274)
+                        pause(1000)
+                    }
+                }
+            }
         }
     }
 })
